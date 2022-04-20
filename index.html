@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Simple Filter</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <header class="header">
+                <h1 class="header_title">Filter by color</h1>
+                <ul class="list">
+                    <li class="list__item active" data-name="all">All</li>
+                    <li class="list__item" data-name="red">red</li>
+                    <li class="list__item" data-name="blue">blue</li>
+                    <li class="list__item" data-name="green">green</li>
+                    <li class="list__item" data-name="yellow">yellow</li>
+                </ul>
+            </header>
+            <main class="blocks">
+                <div class="blocks__item red"><span>red</span></div>
+                <div class="blocks__item green"><span>green</span></div>
+                <div class="blocks__item red"><span>red</span></div>
+                <div class="blocks__item blue"><span>blue</span></div>
+                <div class="blocks__item blue"><span>blue</span></div>
+                <div class="blocks__item red"><span>red</span></div>
+                <div class="blocks__item green"><span>green</span></div>
+                <div class="blocks__item yellow"><span>yellow</span></div>
+                <div class="blocks__item red"><span>red</span></div>
+                <div class="blocks__item yellow"><span>yellow</span></div>
+                <div class="blocks__item green"><span>green</span></div>
+                <div class="blocks__item red"><span>red</span></div>
+                <div class="blocks__item blue"><span>blue</span></div>
+                <div class="blocks__item blue"><span>blue</span></div>
+                <div class="blocks__item red"><span>red</span></div>
+                <div class="blocks__item green"><span>green</span></div>
+            </main>
+        </div>
+
+        <script>
+            const list = document.querySelector(".list");
+            const listItems = document.querySelectorAll(".list__item");
+            const blockItems = document.querySelectorAll(".blocks__item");
+
+            function filter() {
+                list.addEventListener("click", (event) => {
+                    const targetName = event.target.dataset.name;
+
+                    listItems.forEach((item) => {
+                        item.classList.remove("active");
+                    });
+                    event.target.classList.add("active");
+
+                    switch (targetName) {
+                        case "all":
+                            blockItems.forEach((item) => {
+                                item.style.display = "block";
+                            });
+                            break;
+                        case "red":
+                            sort("red");
+                            break;
+                        case "blue":
+                            sort("blue");
+                            break;
+                        case "green":
+                            sort("green");
+                            break;
+                        case "yellow":
+                            sort("yellow");
+                            break;
+                    }
+                });
+            }
+            function sort(name) {
+                blockItems.forEach((item) => {
+                    item.classList.contains(name)
+                        ? (item.style.display = "block")
+                        : (item.style.display = "none");
+                });
+            }
+
+            filter();
+        </script>
+    </body>
+</html>
